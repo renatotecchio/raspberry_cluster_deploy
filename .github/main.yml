@@ -3,8 +3,8 @@ name: Deploy Raspberry Cluster
 on:
   push:
     branches: [ "*" ]
-  pull_request:
-    branches: [ "*" ]
+  #pull_request:
+  #  branches: [ "*" ]
 
 jobs:
   buld:
