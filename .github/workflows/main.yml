@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Install OpenVPN
-      run: apt-get install openvpn
+      run: sudo apt-get install openvpn
