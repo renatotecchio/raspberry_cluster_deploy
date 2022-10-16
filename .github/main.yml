@@ -1,0 +1,16 @@
+name: Deploy Raspberry Cluster
+
+on:
+  push:
+    branches: [ "*" ]
+  pull_request:
+    branches: [ "*" ]
+
+jobs:
+  buld:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: configure vpn
+      run: echo "It is working"
