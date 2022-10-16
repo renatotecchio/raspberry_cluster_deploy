@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  build:
+  pre-build:
 
     runs-on: ubuntu-latest
 
@@ -16,3 +16,4 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
+      run: ping -c 5 e7290d195382.sn.mynetname.net
