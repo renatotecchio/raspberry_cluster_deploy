@@ -17,4 +17,5 @@ jobs:
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
     - name: Test ping
-      run: ping -c 5 e7290d195382.sn.mynetname.net
+      run: ping -c 5 ${{ REMOTE_IP_ADDRESS }}
+
