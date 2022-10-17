@@ -19,3 +19,5 @@ jobs:
     - name: Test ping
       run: ping -c 5 ${{ secrets.REMOTE_IP_ADDRESS }}
 
+      
+
