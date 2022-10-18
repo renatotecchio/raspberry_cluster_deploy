@@ -16,8 +16,10 @@ jobs:
     - uses: actions/checkout@v3
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
-    - name: Test ping
-      run: ping -c 5 ${{ secrets.REMOTE_IP_ADDRESS }}
+    - name: Create ca.crt from CA_CERTIFICATE secret
+      run: |
+        echo "${{ secrets.CA_CERTIFICATE }}" > ca.crt
+        ls -la
 
       
 
