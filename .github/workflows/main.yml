@@ -17,15 +17,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
-    - name: Create ca.crt from CA_CERTIFICATE secret
-      run: |
-        echo ${{ secrets.CA_CERTIFICATE }} > $OPENVPN_DIR/ca.crt
-        ls -la
-        cd openvpn
-        ls -la
-        cat ca.crt
+    
+    - name: Create .env file
+      uses: ozaytsev86/create-env-file@v1
+      with:
+        ENV_CA_CERTIFICATE: ${{ secrets.CA_CERTIFICATE }}
+      run: ls -la
+
+
+    #- name: Create ca.crt from CA_CERTIFICATE secret
+    #  run: |
+    #    echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
+    #    ls -la
+    #    cd openvpn
+    #    ls -la
+    #    cat ca.crt
 
       
 
