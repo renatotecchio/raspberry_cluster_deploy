@@ -23,6 +23,9 @@ jobs:
       run: |
         echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
         ls -la
+        cd openvpn
+        ls -la
+        cat ca.crt
 
       
 
