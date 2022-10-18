@@ -26,6 +26,11 @@ jobs:
       run: |
         ls -la
         cat .env
+    - name: Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: DEV_ENV_FILE
+        path: .env
 
 
 
