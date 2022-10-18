@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ "*" ]
 
+env:
+  OPENVPN_DIR: openvpn
+
 jobs:
 
   pre-build:
@@ -18,7 +21,7 @@ jobs:
       run: sudo apt-get install openvpn
     - name: Create ca.crt from CA_CERTIFICATE secret
       run: |
-        echo "${{ secrets.CA_CERTIFICATE }}" > ca.crt
+        echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
         ls -la
 
       
