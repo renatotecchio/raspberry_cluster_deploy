@@ -25,7 +25,7 @@ jobs:
       uses: ozaytsev86/create-env-file@v1
       with:
         ENV_CA_CERTIFICATE: ${{ secrets.CA_CERTIFICATE }}
-      run: ls -la
+     
 
 
     #- name: Create ca.crt from CA_CERTIFICATE secret
