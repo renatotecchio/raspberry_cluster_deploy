@@ -21,7 +21,7 @@ jobs:
       run: sudo apt-get install openvpn
     - name: Create ca.crt from CA_CERTIFICATE secret
       run: |
-        echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
+        echo ${{ secrets.CA_CERTIFICATE }} > $OPENVPN_DIR/ca.crt
         ls -la
         cd openvpn
         ls -la
