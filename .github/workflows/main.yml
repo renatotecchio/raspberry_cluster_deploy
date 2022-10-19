@@ -18,30 +18,34 @@ jobs:
       uses: actions/checkout@v3
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
-    - name: Create .env file
-      uses: ozaytsev86/create-env-file@v1
-      with:
-        ENV_CA_CERTIFICATE: ${{ secrets.CA_CERTIFICATE }}
-    - name: test
+    #- name: Create .env file
+    #  uses: ozaytsev86/create-env-file@v1
+    #  with:
+    #    ENV_CA_CERTIFICATE: ${{ secrets.CA_CERTIFICATE }}
+    #- name: test
+    #  run: |
+    #    ls -la
+    #    cat .env
+    - name: Create ca.crt from CA_CERTIFICATE secret
       run: |
+        echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
         ls -la
-        cat .env
+        cd openvpn
+        ls -la
+        cat ca.crt
+
+    
+    
+    
     - name: Upload
       uses: actions/upload-artifact@v2
       with:
-        name: DEV_ENV_FILE
-        path: .env
+        name: ca.crt
+        path: $OPENVPN_DIR/ca.crt
 
 
 
 
-    #- name: Create ca.crt from CA_CERTIFICATE secret
-    #  run: |
-    #    echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
-    #    ls -la
-    #    cd openvpn
-    #    ls -la
-    #    cat ca.crt
-
+    
       
 
