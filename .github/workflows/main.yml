@@ -41,7 +41,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: ca.crt
-        path: $OPENVPN_DIR/ca.crt
+        path: ca.crt
 
 
 
