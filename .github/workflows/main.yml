@@ -10,8 +10,8 @@ env:
   OPENVPN_DIR: openvpn
 
 jobs:
-  pre-build:
-    name: Pre Build
+  openvpn-connect:
+    name: Connect OpenVPN
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
@@ -41,3 +41,10 @@ jobs:
     #  with:
     #    name: ca.crt
     #    path: openvpn/ca.crt
+
+  run-ansible:
+    name: Run Ansible
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
