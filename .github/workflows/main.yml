@@ -26,6 +26,8 @@ jobs:
       run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > $OPENVPN_DIR/client.auth
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
+    - name: Connection OpenVPN
+      run: openvpn --config openvpn/client.conf
     
     #- name: Upload
     #  uses: actions/upload-artifact@v2
