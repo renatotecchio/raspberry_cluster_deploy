@@ -16,32 +16,25 @@ jobs:
     steps:
     - name: Checkout Repo
       uses: actions/checkout@v3
-    - name: Install OpenVPN
-      run: sudo apt-get install openvpn
-    #- name: Create .env file
-    #  uses: ozaytsev86/create-env-file@v1
-    #  with:
-    #    ENV_CA_CERTIFICATE: ${{ secrets.CA_CERTIFICATE }}
-    #- name: test
-    #  run: |
-    #    ls -la
-    #    cat .env
     - name: Create ca.crt from CA_CERTIFICATE secret
-      run: |
-        echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
-        ls -la
-        cd openvpn
-        ls -la
-        cat ca.crt
+      run: echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
+    - name: Create client.crt from CLIENT_CERTIFICATE secret
+      run: echo "${{ secrets.CLIENT_CERTIFICATE }}" > $OPENVPN_DIR/client.crt
+    - name: Create client.key from CLIENT_PRIVATE_KEY secret
+      run: echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > $OPENVPN_DIR/client.key
+    - name: Create client.auth from OPENVPN_CLIENT_CREDENTIAL secret
+      run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > $OPENVPN_DIR/client.auth
 
     
     
     
-    - name: Upload
-      uses: actions/upload-artifact@v2
-      with:
-        name: ca.crt
-        path: openvpn/ca.crt
+    #- name: Install OpenVPN
+    #  run: sudo apt-get install openvpn
+    #- name: Upload
+    #  uses: actions/upload-artifact@v2
+    #  with:
+    #    name: ca.crt
+    #    path: openvpn/ca.crt
 
 
 
