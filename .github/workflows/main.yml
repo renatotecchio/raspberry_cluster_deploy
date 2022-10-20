@@ -27,7 +27,7 @@ jobs:
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
     - name: Replace REMOTE_IP_ADDRESS variable
-      run: sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' openvpn/song.txt
+      run: sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' openvpn/client.conf
     - name: Connection OpenVPN
       run: |
         cd openvpn
