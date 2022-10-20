@@ -29,7 +29,7 @@ jobs:
     - name: Connection OpenVPN
       run: |
         cd openvpn
-        openvpn --config client.conf
+        sudo openvpn --config client.conf
     
     #- name: Upload
     #  uses: actions/upload-artifact@v2
