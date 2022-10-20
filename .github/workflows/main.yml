@@ -26,6 +26,8 @@ jobs:
       run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > $OPENVPN_DIR/client.auth
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
+    - name: Replace REMOTE_IP_ADDRESS variable
+      run: sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' openvpn/song.txt
     - name: Connection OpenVPN
       run: |
         cd openvpn
