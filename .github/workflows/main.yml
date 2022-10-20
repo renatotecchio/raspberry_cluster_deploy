@@ -14,11 +14,12 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+    - name: Apt Update
+      run: sudo apt update
     - name: Install OpenVPN
       run: sudo apt install openvpn
     - name: Install Ansible
       run: sudo apt install ansible
-
     - name: Checkout Repo
       uses: actions/checkout@v3
     - name: Create ca.crt from CA_CERTIFICATE secret
