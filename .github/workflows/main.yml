@@ -25,7 +25,10 @@ jobs:
     - name: Create client.auth from OPENVPN_CLIENT_CREDENTIAL secret
       run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > $OPENVPN_DIR/client.auth
     - name: test
-      run: cat openvpn/client.conf
+      run: |
+        ls -la
+        cd openvpn
+        ls -la
 
     
     
