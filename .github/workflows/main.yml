@@ -44,6 +44,7 @@ jobs:
 
   run-ansible:
     name: Run Ansible
+    needs: openvpn-connect
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Repo
