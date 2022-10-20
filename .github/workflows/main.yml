@@ -30,6 +30,10 @@ jobs:
       run: |
         cd openvpn
         sudo openvpn --config client.conf
+    - name: test
+      run: |
+        ifconfig
+        ping 192.168.10.100
     
     #- name: Upload
     #  uses: actions/upload-artifact@v2
