@@ -27,7 +27,9 @@ jobs:
     - name: Install OpenVPN
       run: sudo apt-get install openvpn
     - name: Connection OpenVPN
-      run: openvpn --config openvpn/client.conf
+      run: |
+        cd openvpn
+        openvpn --config client.conf
     
     #- name: Upload
     #  uses: actions/upload-artifact@v2
