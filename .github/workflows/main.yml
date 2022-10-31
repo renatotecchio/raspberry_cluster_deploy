@@ -1,13 +1,11 @@
 name: Deploy Raspberry Cluster
 
 on:
-  push:
-    branches: [ "*" ]
   pull_request:
     branches: [ "*" ]
 
-env:
-  OPENVPN_DIR: openvpn
+#env:
+  #OPENVPN_DIR: openvpn
 
 jobs:
   build:
@@ -22,23 +20,19 @@ jobs:
       run: sudo apt install ansible
     - name: Checkout Repo
       uses: actions/checkout@v3
-    - name: Create ca.crt from CA_CERTIFICATE secret
-      run: echo "${{ secrets.CA_CERTIFICATE }}" > $OPENVPN_DIR/ca.crt
-    - name: Create client.crt from CLIENT_CERTIFICATE secret
-      run: echo "${{ secrets.CLIENT_CERTIFICATE }}" > $OPENVPN_DIR/client.crt
-    - name: Create client.key from CLIENT_PRIVATE_KEY secret
-      run: echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > $OPENVPN_DIR/client.key
-    - name: Create client.auth from OPENVPN_CLIENT_CREDENTIAL secret
-      run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > $OPENVPN_DIR/client.auth
-    
-    - name: Replace REMOTE_IP_ADDRESS variable
-      run: sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' openvpn/template.conf > openvpn/client.conf
+    - name: Clone renatotecchio/mikrotik_openvpn repo and create files
+      run: | 
+        git clone https://github.com/renatotecchio/mikrotik_openvpn.git
+        cd mikrotik_openvpn
+        echo "${{ secrets.CA_CERTIFICATE }}" > ca.crt
+        echo "${{ secrets.CLIENT_CERTIFICATE }}" > client.crt
+        echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > client.key
+        echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > client.auth
+        sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' client_template.conf > client.conf
     - name: Connection OpenVPN
       run: |
-        cd openvpn
+        cd mikrotik_openvpn
         sudo openvpn --config client.conf&
-    
-
     - name: Run Ansible Playbook
       run: |
         ifconfig
