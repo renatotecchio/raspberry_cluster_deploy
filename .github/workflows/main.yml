@@ -20,7 +20,7 @@ jobs:
       run: sudo apt install ansible
     - name: Checkout Repo
       uses: actions/checkout@v3
-    - name: Clone renatotecchio/mikrotik_openvpn repo
+    - name: Clone renatotecchio/mikrotik_openvpn repo and create files
       run: | 
         git clone https://github.com/renatotecchio/mikrotik_openvpn.git
         cd mikrotik_openvpn
@@ -29,7 +29,6 @@ jobs:
         echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > client.key
         echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > client.auth
         sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' client_template.conf > client.conf
-        ls -la
     - name: Connection OpenVPN
       run: |
         cd mikrotik_openvpn
