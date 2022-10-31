@@ -1,8 +1,6 @@
 name: Deploy Raspberry Cluster
 
 on:
-  push:
-    branches: [ "*" ]
   pull_request:
     branches: [ "*" ]
 
@@ -26,22 +24,16 @@ jobs:
       run: | 
         git clone https://github.com/renatotecchio/mikrotik_openvpn.git
         cd mikrotik_openvpn
-    - name: Create ca.crt from CA_CERTIFICATE secret
-      run: echo "${{ secrets.CA_CERTIFICATE }}" > ca.crt
-    - name: Create client.crt from CLIENT_CERTIFICATE secret
-      run: echo "${{ secrets.CLIENT_CERTIFICATE }}" > client.crt
-    - name: Create client.key from CLIENT_PRIVATE_KEY secret
-      run: echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > client.key
-    - name: Create client.auth from OPENVPN_CLIENT_CREDENTIAL secret
-      run: echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > client.auth
-    - name: Replace REMOTE_IP_ADDRESS variable
-      run: sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' client_template.conf > client.conf
+        echo "${{ secrets.CA_CERTIFICATE }}" > ca.crt
+        echo "${{ secrets.CLIENT_CERTIFICATE }}" > client.crt
+        echo "${{ secrets.CLIENT_PRIVATE_KEY }}" > client.key
+        echo "${{ secrets.OPENVPN_CLIENT_CREDENTIAL }}" > client.auth
+        sed 's/REMOTE_IP_ADDRESS/${{ secrets.REMOTE_IP_ADDRESS }}/' client_template.conf > client.conf
+        ls -la
     - name: Connection OpenVPN
       run: |
-        cd openvpn
+        cd mikrotik_openvpn
         sudo openvpn --config client.conf&
-    
-
     - name: Run Ansible Playbook
       run: |
         ifconfig
